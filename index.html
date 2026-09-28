@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ff7043">
+<title>AWN Seblak — Order Online</title>
+<style>
+:root{
+  --orange:#1976d2;--orange2:#5da5f5;--cream:#f4f9ff;--brown:#17314d;
+  --muted:#2d8cff;--line:#dfeaf6;--green:#1a73d8;
+  --premium-blue-1:#071f3d;--premium-blue-2:#0c3d72;--premium-blue-3:#1f6fe5;
+}
+*{box-sizing:border-box} body{margin:0;background:linear-gradient(180deg,#061a2f,#0e2d52 35%,#eff7ff 100%);font-family:Arial,Helvetica,sans-serif;color:var(--brown)}
+.page{max-width:760px;margin:auto;background:linear-gradient(180deg,#f8fbff 0%,#eef5ff 100%);min-height:100vh;padding-bottom:120px}
+.hero{position:relative;text-align:center;padding:30px 20px 20px;background:radial-gradient(circle at top, rgba(106,180,255,.5), rgba(8,29,58,.92) 42%, rgba(7,22,41,.97) 100%);border-bottom-left-radius:34px;border-bottom-right-radius:34px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.08),transparent 35%,rgba(255,255,255,.04));pointer-events:none}
+.hero-logo{position:relative;z-index:1;display:block;width:min(380px,78vw);height:auto;margin:0 auto 4px;filter:drop-shadow(0 12px 22px rgba(31,111,229,.35));}
+.brand{position:relative;z-index:1;font-size:clamp(30px,6vw,44px);font-weight:900;margin:0 0 6px;letter-spacing:-1.5px;color:#fff7ee;text-transform:uppercase;text-shadow:0 2px 0 rgba(0,0,0,.12),0 8px 16px rgba(0,0,0,.16)}
+.heart{color:#ffd9a8;font-weight:400}
+.tagline{position:relative;z-index:1;color:#dbeafe;font-size:15px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.card{margin:18px 20px;background:white;border:1px solid var(--line);border-radius:26px;box-shadow:0 3px 12px rgba(26,115,216,.08)}
+.steps{padding:22px 20px}.section-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e7effd;padding-bottom:16px;margin-bottom:18px}
+.section-head h2{margin:0;font-size:20px;text-transform:uppercase;letter-spacing:1px;color:#1b4d8f}.section-head span{color:#5e7ea8}
+.step-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.step{text-align:center;background:#f8fbff;border:1px solid #e3efff;border-radius:22px;padding:18px 8px}.step-icon{width:48px;height:48px;border-radius:50%;background:#edf6ff;margin:auto;display:flex;align-items:center;justify-content:center;color:var(--orange);font-size:23px}.step b{display:block;font-size:16px;margin-top:12px}.step small{display:block;color:#647c99;font-size:13px;line-height:1.4;margin-top:6px}
+.title{font-size:27px;margin:30px 25px 15px}.title span{color:var(--orange)}
+.menu{padding:0 20px}.product{background:#fff;border:1px solid var(--line);border-radius:24px;padding:15px;display:flex;gap:15px;align-items:center;margin-bottom:14px;box-shadow:0 2px 10px rgba(26,115,216,.06)}.pic{width:112px;height:112px;border-radius:20px;background:#edf6ff;display:flex;align-items:center;justify-content:center;font-size:42px;flex-shrink:0}.info{flex:1;min-width:0}.badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:7px}.badge{font-size:12px;padding:6px 9px;border-radius:10px;background:#eaf4ff;color:#1a5fc9;font-weight:700}.badge.orange{background:#edf6ff;color:#1b6bd6}.name{font-size:20px;font-weight:800;margin-bottom:6px}.desc{color:#627c99;line-height:1.5;font-size:14px}.price{font-size:19px;font-weight:800;color:var(--orange);margin-top:10px}.unit{font-size:12px;color:#627c99;font-weight:400}.add{border:0;background:var(--orange);color:#fff;border-radius:30px;padding:13px 18px;font-size:15px;font-weight:800;cursor:pointer;white-space:nowrap;box-shadow:0 3px 8px rgba(25,118,210,.28)}.add:active{transform:scale(.97)}
+.form-card{padding:22px 20px;margin-top:25px}.form-card h2{margin:0 0 20px;font-size:22px}.field{margin-bottom:15px}.field label{display:block;font-weight:700;margin-bottom:7px}.field input,.field textarea{width:100%;padding:15px;border:2px solid #dfeaf6;border-radius:16px;font-size:16px;outline:none;background:#fff}.field input:focus,.field textarea:focus{border-color:var(--orange)}textarea{min-height:85px;resize:vertical}
+.cart{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);width:min(720px,calc(100% - 28px));background:#fff;border:1px solid #dfeaf6;border-radius:22px;padding:13px 14px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 30px rgba(23,49,77,.14);z-index:10}.cart-info{flex:1}.cart-count{font-weight:800}.cart-total{font-size:13px;color:#617a9a;margin-top:2px}.wa{border:0;background:#0d6efd;color:#fff;padding:15px 20px;border-radius:17px;font-size:15px;font-weight:800;cursor:pointer}
+.qty{display:flex;align-items:center;gap:7px;margin-top:8px}.qty button{width:29px;height:29px;border-radius:9px;border:1px solid #dfeaf6;background:#fff;color:var(--orange);font-weight:800;cursor:pointer}
+.empty{color:#1a73d8;text-align:center;padding:15px}.notice{font-size:12px;color:#2a6ec2;margin-top:8px;line-height:1.5}
+@media(max-width:560px){
+ .brand{font-size:32px}.logo{width:112px;height:112px}.step-grid{gap:7px}.step{padding:14px 4px}.step b{font-size:14px}.step small{font-size:11px}
+ .product{align-items:flex-start}.pic{width:88px;height:88px;font-size:34px}.name{font-size:17px}.desc{font-size:13px}.add{padding:11px 13px}
+ .cart{bottom:10px}.wa{padding:13px 14px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+<header class="hero">
+  <img class="hero-logo" src="Logo/LOGO AWN SEBLAK.png" alt="Logo AWN Seblak">
+  <div class="brand">AWN <span class="heart">SEBLAK</span></div>
+  <div class="tagline">Pedas gurih mantap</div>
+</header>
+
+<section class="card steps">
+  <div class="section-head"><h2>Cara Order Praktis</h2><span>Mudah & Cepat ♡</span></div>
+  <div class="step-grid">
+    <div class="step"><div class="step-icon">🍴</div><b>1. Pilih Menu</b><small>Pilih makanan favoritmu</small></div>
+    <div class="step"><div class="step-icon">♙</div><b>2. Isi Data</b><small>Nama & WhatsApp</small></div>
+    <div class="step"><div class="step-icon">➤</div><b>3. Kirim Pesanan</b><small>Langsung ke WhatsApp</small></div>
+  </div>
+</section>
+
+<h2 class="title">Pilih Menu <span>✦</span></h2>
+<section id="menu" class="menu"></section>
+
+<section class="card form-card">
+  <h2>✓ &nbsp;Data Pemesan</h2>
+  <div class="field"><label>Nama *</label><input id="name" placeholder="Contoh: Aslan"></div>
+  <div class="field"><label>Nomor WhatsApp *</label><input id="phone" type="tel" placeholder="Contoh: 08123456789"></div>
+  <div class="field"><label>Alamat *</label><textarea id="address" placeholder="Alamat lengkap pengantaran"></textarea></div>
+  <div class="field"><label>Catatan</label><textarea id="note" placeholder="Contoh: Tidak terlalu pedas"></textarea></div>
+  <div class="notice">Pesanan akan dibuat dalam format WhatsApp. Pastikan data sudah benar sebelum mengirim.</div>
+</section>
+</div>
+
+<div class="cart">
+  <div class="cart-info"><div class="cart-count" id="cartCount">0 item</div><div class="cart-total" id="cartTotal">Total Rp0</div></div>
+  <button class="wa" onclick="sendOrder()">💬 Kirim Pesanan</button>
+</div>
+
+<script>
+/* =========================
+   PENGATURAN TOKO
+   Ganti nomor WhatsApp di bawah.
+   Format: 628xxxxxxxxxx (tanpa +)
+========================= */
+const WHATSAPP_NUMBER = "6285692727331"; // GANTI dengan nomor WhatsApp toko
+// Nama toko, tagline, logo, dan menu dapat diubah pada bagian HTML/produk di bawah.
+
+const products = [
+  {id:1,name:"Seblak Sanguan",price:20000,unit:"cup",emoji:"🥘",desc:"Seblak Pakai Nasi Dengan Isian Kerupuk, Ceker Dsb + Nasi.",fav:true,stock:"Paling Favorit"},
+  {id:2,name:"Pop Ice",price:5000,unit:"cup",emoji:"🧊",desc:"Pop Ice Aneka Rasa.",fav:false,stock:"Best Seller"},
+  {id:3,name:"Es Cekek",price:2000,unit:"cup",emoji:"🥤",desc:"Es Cekek Aneka Rasa",fav:true,stock:"Favorit"},
+  {id:4,name:"Seblak Kumplit",price:25000,unit:"box",emoji:"🍜",desc:"Seblak Paket Kumplit Dengan Full Toping",fav:false,stock:"Tersedia"}
+];
+
+let cart = {};
+
+function rupiah(n){return new Intl.NumberFormat("id-ID",{style:"currency",currency:"IDR",maximumFractionDigits:0}).format(n)}
+
+function renderMenu(){
+ const el=document.getElementById("menu");
+ el.innerHTML=products.map(p=>`
+ <article class="product">
+   <div class="pic">${p.emoji}</div>
+   <div class="info">
+     <div class="badges"><span class="badge">${p.stock}</span>${p.fav?'<span class="badge orange">Paling Favorit ♡</span>':''}</div>
+     <div class="name">${p.name}</div>
+     <div class="desc">${p.desc}</div>
+     <div class="price">${rupiah(p.price)}<span class="unit">/${p.unit}</span></div>
+     ${cart[p.id]?`<div class="qty"><button onclick="changeQty(${p.id},-1)">−</button><b>${cart[p.id]}</b><button onclick="changeQty(${p.id},1)">+</button></div>`:''}
+   </div>
+   ${cart[p.id]?'':`<button class="add" onclick="changeQty(${p.id},1)">＋ Tambah</button>`}
+ </article>`).join("");
+ updateCart();
+}
+
+function changeQty(id,delta){
+ cart[id]=(cart[id]||0)+delta;
+ if(cart[id]<=0) delete cart[id];
+ renderMenu();
+}
+
+function updateCart(){
+ let count=0,total=0;
+ for(const [id,q] of Object.entries(cart)){const p=products.find(x=>x.id==id);count+=q;total+=p.price*q}
+ document.getElementById("cartCount").textContent=count+" item";
+ document.getElementById("cartTotal").textContent="Total "+rupiah(total);
+ return {count,total};
+}
+
+function sendOrder(){
+ const {count,total}=updateCart();
+ const name=document.getElementById("name").value.trim();
+ const phone=document.getElementById("phone").value.trim();
+ const address=document.getElementById("address").value.trim();
+ const note=document.getElementById("note").value.trim();
+
+ if(!count) return alert("Silakan pilih minimal 1 menu.");
+ if(!name || !phone || !address) return alert("Mohon isi Nama, Nomor WhatsApp, dan Alamat.");
+
+ let lines=[];
+ Object.entries(cart).forEach(([id,q])=>{
+   const p=products.find(x=>x.id==id);
+   lines.push(`• ${p.name} x${q} = ${rupiah(p.price*q)}`);
+ });
+ const msg=`Halo AWN Seblak 👋
+
+Saya ingin memesan:
+${lines.join("\n")}
+
+Total: ${rupiah(total)}
+
+Data Pemesan:
+Nama: ${name}
+WhatsApp: ${phone}
+Alamat: ${address}
+Catatan: ${note || "-"}
+
+Mohon konfirmasi pesanan saya. Terima kasih 🙏`;
+
+ window.open("https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(msg),"_blank");
+}
+renderMenu();
+</script>
+</body>
+</html>
